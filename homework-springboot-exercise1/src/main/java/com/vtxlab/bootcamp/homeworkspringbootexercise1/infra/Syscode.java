@@ -1,16 +1,17 @@
 package com.vtxlab.bootcamp.homeworkspringbootexercise1.infra;
 
-public enum Errors {
+public enum Syscode {
 
-  INVALID_INPUT (1, "Invalid input."),
-  INVALID_OPERATION (2, "Invalid operation."),
-  DIVID_BY_ZERO (3, "Divided by zero."),
+  OK (1, "OK."),
+  INVALID_INPUT (2, "Invalid input."),
+  INVALID_OPERATION (3, "Invalid operation."),
+  DIVID_BY_ZERO (4, "Divided by zero."),
   ;
 
   private int code;
   private String message; 
 
-  private Errors(int code, String message) {
+  private Syscode(int code, String message) {
     this.code = code;
     this.message = message;
   }

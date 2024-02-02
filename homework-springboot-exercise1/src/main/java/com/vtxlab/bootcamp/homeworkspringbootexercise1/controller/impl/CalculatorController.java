@@ -1,14 +1,13 @@
 package com.vtxlab.bootcamp.homeworkspringbootexercise1.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.controller.CalculatorOperation;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Errors;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.ApiResp;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Syscode;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.model.CalResult;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.model.ErrMessage;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.model.Input;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.CalculatorService;
 
@@ -20,10 +19,10 @@ public class CalculatorController implements CalculatorOperation {
   private CalculatorService calculatorService;
 
   @Override
-  public String calculator(String x, String y, String operation) {
+  public ResponseEntity<ApiResp<CalResult>> calculator(String x, String y,
+      String operation) {
 
     double result = 0.0d;
-
     double doubleX = 0.0d;
     double doubleY = 0.0d;
 
@@ -31,11 +30,15 @@ public class CalculatorController implements CalculatorOperation {
       doubleX = Double.parseDouble(x);
       doubleY = Double.parseDouble(y);
     } catch (IllegalArgumentException ex) {
-      ErrMessage errMessage = ErrMessage.builder() //
-          .code(Errors.INVALID_INPUT.getCode()) //
-          .message(Errors.INVALID_INPUT.getMessage()) //
-          .build();
-      return toJson(errMessage);
+
+      CalResult calResult = CalResult.of(x, y, operation, "ERROR");
+
+      ApiResp<CalResult> errMessage = ApiResp.of( //
+              Syscode.INVALID_INPUT.getCode(), //
+              Syscode.INVALID_INPUT.getMessage(),  //
+              calResult);
+
+      return ResponseEntity.badRequest().body(errMessage);
     }
 
     switch (operation) {
@@ -53,52 +56,51 @@ public class CalculatorController implements CalculatorOperation {
 
       case "div":
         if (doubleY == 0.0) {
-          ErrMessage errMessage = ErrMessage.builder() //
-              .code(Errors.DIVID_BY_ZERO.getCode()) //
-              .message(Errors.DIVID_BY_ZERO.getMessage()) //
-              .build();
 
-          return toJson(errMessage);
+          CalResult calResult = CalResult.of(x, y, operation, "ERROR");
+
+          ApiResp<CalResult> errMessage = ApiResp.of( //
+          Syscode.DIVID_BY_ZERO.getCode(), //
+          Syscode.DIVID_BY_ZERO.getMessage(),  //
+          calResult);
+
+          return ResponseEntity.status(400).body(errMessage);
         }
         result = calculatorService.divide(doubleX, doubleY);
         break;
 
       default:
-        ErrMessage errMessage = ErrMessage.builder() //
-            .code(Errors.INVALID_OPERATION.getCode()) //
-            .message(Errors.INVALID_OPERATION.getMessage()) //
-            .build();
 
-        return toJson(errMessage);
+        CalResult calResult = CalResult.of(x, y, operation, "ERROR");
+
+        ApiResp<CalResult> errMessage = ApiResp.of( //
+        Syscode.INVALID_OPERATION.getCode(), //
+        Syscode.INVALID_OPERATION.getMessage(),  //
+        calResult);
+
+        return ResponseEntity.status(400).body(errMessage);
     }
 
-    CalResult calResult = CalResult.builder() //
-        .x(x) //
-        .y(y) //
-        .operation(operation) //
-        .calResult(String.valueOf(result)) //
-        .build();
+    CalResult calResult = CalResult.of(x, y, operation, String.valueOf(result));;
 
-    return toJson(calResult);
+    ApiResp<CalResult> apiResp = ApiResp.of( //
+        Syscode.OK.getCode(), //
+        Syscode.OK.getMessage(),  //
+        calResult);
+
+    return ResponseEntity.ok(apiResp);
   }
 
   @Override
-  public String calculator2(String x, String y, String operation) {
+  public ResponseEntity<ApiResp<CalResult>> calculator2(String x, String y,
+      String operation) {
     return calculator(x, y, operation);
   }
 
   @Override
-  public String calculator3(Input input) {
+  public ResponseEntity<ApiResp<CalResult>> calculator3(Input input) {
     return calculator(input.getX(), input.getY(), input.getOperation());
   }
 
-  public static String toJson(Object obj) {
-    ObjectMapper objectMapper = new ObjectMapper();
-    String message = "";
-    try {
-      message = objectMapper.writeValueAsString(obj);
-    } catch (JsonProcessingException ex) {
-    }
-    return message;
-  }
+
 }
