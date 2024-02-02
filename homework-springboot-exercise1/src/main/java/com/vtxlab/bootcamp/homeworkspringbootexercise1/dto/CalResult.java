@@ -1,4 +1,4 @@
-package com.vtxlab.bootcamp.homeworkspringbootexercise1.model;
+package com.vtxlab.bootcamp.homeworkspringbootexercise1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

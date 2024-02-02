@@ -4,7 +4,7 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.model.CalResult;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResult;
 
 public class CalResultTest {
 
@@ -15,7 +15,7 @@ public class CalResultTest {
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     String actual = result.getX();
@@ -31,7 +31,7 @@ public class CalResultTest {
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     String actual = result.getY();
@@ -47,7 +47,7 @@ public class CalResultTest {
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     String actual = result.getOperation();
@@ -63,21 +63,21 @@ public class CalResultTest {
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     CalResult result2 = CalResult.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     CalResult result3 = CalResult.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("add") //
-        .calResult("13.0") //
+        .result("13.0") //
         .build();
 
     boolean actual1 = result1.equals(result2);
@@ -95,21 +95,21 @@ public class CalResultTest {
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     CalResult result2 = CalResult.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     CalResult result3 = CalResult.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("add") //
-        .calResult("13.0") //
+        .result("13.0") //
         .build();
 
     int actual1 = result1.hashCode();
@@ -130,13 +130,13 @@ public class CalResultTest {
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
 
     String actual = result1.toString();
 
 
-    assertThat(actual, equalTo("CalResult(x=3.0, y=10.0, operation=sub, calResult=-7.0)")); 
+    assertThat(actual, equalTo("CalResult(x=3.0, y=10.0, operation=sub, result=-7.0)")); 
 
   }
 
@@ -147,7 +147,7 @@ public class CalResultTest {
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
-        .calResult("-7.0") //
+        .result("-7.0") //
         .build();
     
     CalResult result = new CalResult("3.0","10.0","sub","-7.0");

@@ -1,14 +1,16 @@
 package com.vtxlab.bootcamp.homeworkspringbootexercise1.controller.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.controller.CalculatorOperation;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.ApiResp;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResult;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.ErrorMsg;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.Input;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Mapper;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Syscode;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.model.CalResult;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.model.Input;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.CalculatorService;
 
 @RestController
@@ -19,8 +21,8 @@ public class CalculatorController implements CalculatorOperation {
   private CalculatorService calculatorService;
 
   @Override
-  public ResponseEntity<ApiResp<CalResult>> calculator(String x, String y,
-      String operation) {
+  public ResponseEntity<String> calculator(String x, String y,
+      String operation) throws Exception {
 
     double result = 0.0d;
     double doubleX = 0.0d;
@@ -31,14 +33,12 @@ public class CalculatorController implements CalculatorOperation {
       doubleY = Double.parseDouble(y);
     } catch (IllegalArgumentException ex) {
 
-      CalResult calResult = CalResult.of(x, y, operation, "ERROR");
+      ErrorMsg err = ErrorMsg.of(Syscode.INVALID_INPUT.getCode(), //
+          Syscode.INVALID_INPUT.getMessage());
 
-      ApiResp<CalResult> errMessage = ApiResp.of( //
-              Syscode.INVALID_INPUT.getCode(), //
-              Syscode.INVALID_INPUT.getMessage(),  //
-              calResult);
+      String jsonErr = Mapper.map(err);
 
-      return ResponseEntity.badRequest().body(errMessage);
+      return new ResponseEntity<String>(jsonErr, HttpStatus.BAD_REQUEST);
     }
 
     switch (operation) {
@@ -57,48 +57,43 @@ public class CalculatorController implements CalculatorOperation {
       case "div":
         if (doubleY == 0.0) {
 
-          CalResult calResult = CalResult.of(x, y, operation, "ERROR");
+          ErrorMsg err = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+              Syscode.DIVID_BY_ZERO.getMessage());
 
-          ApiResp<CalResult> errMessage = ApiResp.of( //
-          Syscode.DIVID_BY_ZERO.getCode(), //
-          Syscode.DIVID_BY_ZERO.getMessage(),  //
-          calResult);
+          String jsonErr = Mapper.map(err);
 
-          return ResponseEntity.status(400).body(errMessage);
+          return new ResponseEntity<String>(jsonErr, HttpStatus.BAD_REQUEST);
         }
+
         result = calculatorService.divide(doubleX, doubleY);
         break;
 
       default:
 
-        CalResult calResult = CalResult.of(x, y, operation, "ERROR");
+      ErrorMsg err = ErrorMsg.of(Syscode.INVALID_OPERATION.getCode(), //
+          Syscode.INVALID_OPERATION.getMessage());
+      
+      String jsonErr = Mapper.map(err);
 
-        ApiResp<CalResult> errMessage = ApiResp.of( //
-        Syscode.INVALID_OPERATION.getCode(), //
-        Syscode.INVALID_OPERATION.getMessage(),  //
-        calResult);
-
-        return ResponseEntity.status(400).body(errMessage);
+      return new ResponseEntity<String>(jsonErr, HttpStatus.BAD_REQUEST);
     }
 
-    CalResult calResult = CalResult.of(x, y, operation, String.valueOf(result));;
+    CalResult calResult =
+        CalResult.of(x, y, operation, String.valueOf(result));
 
-    ApiResp<CalResult> apiResp = ApiResp.of( //
-        Syscode.OK.getCode(), //
-        Syscode.OK.getMessage(),  //
-        calResult);
+        String jsonString = Mapper.map(calResult);
 
-    return ResponseEntity.ok(apiResp);
+        return new ResponseEntity<String>(jsonString, HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<ApiResp<CalResult>> calculator2(String x, String y,
-      String operation) {
+  public ResponseEntity<String> calculator2(String x, String y,
+      String operation) throws Exception {
     return calculator(x, y, operation);
   }
 
   @Override
-  public ResponseEntity<ApiResp<CalResult>> calculator3(Input input) {
+  public ResponseEntity<String> calculator3(Input input) throws Exception {
     return calculator(input.getX(), input.getY(), input.getOperation());
   }
 
