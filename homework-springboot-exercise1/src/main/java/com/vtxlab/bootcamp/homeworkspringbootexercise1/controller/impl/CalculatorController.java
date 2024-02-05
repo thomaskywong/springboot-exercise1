@@ -9,6 +9,7 @@ import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.InputDTO;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.DivideByZeroException;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.InvalidInputException;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.InvalidOperationException;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Operator;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.CalculatorService;
 
 @RestController
@@ -33,30 +34,30 @@ public class CalculatorController implements CalculatorOperation {
       throw new InvalidInputException();
     }
 
-    switch (operation) {
-      case "add":
-        result = calculatorService.add(doubleX, doubleY);
-        break;
+    if (Operator.ADD.getDesc().equals(operation)){ 
 
-      case "sub":
-        result = calculatorService.subtract(doubleX, doubleY);
-        break;
-
-      case "mul":
-        result = calculatorService.multiply(doubleX, doubleY);
-        break;
-
-      case "div":
-        if (doubleY == 0.0) 
-          throw new DivideByZeroException();    
-
-        result = calculatorService.divide(doubleX, doubleY);
-        break;
-
-      default:
-
-        throw new InvalidOperationException();
-
+      result = calculatorService.add(doubleX, doubleY);
+    
+    } else if (Operator.SUBSTRACT.getDesc().equals(operation)) {
+    
+      result = calculatorService.subtract(doubleX, doubleY);
+    
+    } else if (Operator.MULTIPLY.getDesc().equals(operation)) {
+    
+      result = calculatorService.multiply(doubleX, doubleY);
+    
+    } else if (Operator.DIVIDE.getDesc().equals(operation)) {
+    
+      if (doubleY == 0.0) { 
+        throw new DivideByZeroException();    
+      }
+    
+      result = calculatorService.divide(doubleX, doubleY);
+    
+    } else {
+    
+      throw new InvalidOperationException();
+    
     }
 
     return CalResultDTO.of(x, y, operation, String.valueOf(result));
