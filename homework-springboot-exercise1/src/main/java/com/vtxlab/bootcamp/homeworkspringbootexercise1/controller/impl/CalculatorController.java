@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.controller.CalculatorOperation;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResultDTO;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.InputDTO;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.DivideByZeroException;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.InvalidInputException;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.InvalidOperationException;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.CalculatorService;
@@ -47,7 +48,7 @@ public class CalculatorController implements CalculatorOperation {
 
       case "div":
         if (doubleY == 0.0) 
-          throw new InvalidInputException();    
+          throw new DivideByZeroException();    
 
         result = calculatorService.divide(doubleX, doubleY);
         break;
