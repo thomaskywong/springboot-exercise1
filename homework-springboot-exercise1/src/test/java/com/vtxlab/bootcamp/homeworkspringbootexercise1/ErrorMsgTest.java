@@ -3,7 +3,7 @@ package com.vtxlab.bootcamp.homeworkspringbootexercise1;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.jupiter.api.Test;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.ErrorMsg;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.ErrorMsgDTO;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Syscode;
 
 public class ErrorMsgTest {
@@ -11,10 +11,10 @@ public class ErrorMsgTest {
   @Test
   void of() {
 
-    ErrorMsg actual = ErrorMsg.of(Syscode.INVALID_OPERATION.getCode(), //
+    ErrorMsgDTO actual = ErrorMsgDTO.of(Syscode.INVALID_OPERATION.getCode(), //
         Syscode.INVALID_OPERATION.getMessage());
 
-    ErrorMsg expected = new ErrorMsg(Syscode.INVALID_OPERATION.getCode(),
+    ErrorMsgDTO expected = new ErrorMsgDTO(Syscode.INVALID_OPERATION.getCode(),
         Syscode.INVALID_OPERATION.getMessage());
 
     assertThat(actual, equalTo(expected));
@@ -25,7 +25,7 @@ public class ErrorMsgTest {
   @Test
   void getCode() {
 
-    ErrorMsg actual = ErrorMsg.of(Syscode.INVALID_OPERATION.getCode(), //
+    ErrorMsgDTO actual = ErrorMsgDTO.of(Syscode.INVALID_OPERATION.getCode(), //
         Syscode.INVALID_OPERATION.getMessage());
 
     int actualCode = actual.getCode();
@@ -37,7 +37,7 @@ public class ErrorMsgTest {
   @Test
   void getMessage() {
 
-    ErrorMsg actual = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+    ErrorMsgDTO actual = ErrorMsgDTO.of(Syscode.DIVID_BY_ZERO.getCode(), //
         Syscode.DIVID_BY_ZERO.getMessage());
 
     String actualMessage = actual.getMessage();
@@ -49,13 +49,13 @@ public class ErrorMsgTest {
   @Test
   void equals() {
 
-    ErrorMsg actual1 = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+    ErrorMsgDTO actual1 = ErrorMsgDTO.of(Syscode.DIVID_BY_ZERO.getCode(), //
         Syscode.DIVID_BY_ZERO.getMessage());
 
-    ErrorMsg actual2 = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+    ErrorMsgDTO actual2 = ErrorMsgDTO.of(Syscode.DIVID_BY_ZERO.getCode(), //
         Syscode.DIVID_BY_ZERO.getMessage());
 
-    ErrorMsg actual3 = ErrorMsg.of(Syscode.OK.getCode(), //
+    ErrorMsgDTO actual3 = ErrorMsgDTO.of(Syscode.OK.getCode(), //
         Syscode.OK.getMessage());
 
     assertThat(actual1.equals(actual2), equalTo(true));
@@ -67,10 +67,10 @@ public class ErrorMsgTest {
   @Test
   void hashCode1() {
 
-    ErrorMsg actual1 = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+    ErrorMsgDTO actual1 = ErrorMsgDTO.of(Syscode.DIVID_BY_ZERO.getCode(), //
         Syscode.DIVID_BY_ZERO.getMessage());
 
-    ErrorMsg actual2 = ErrorMsg.of(Syscode.INVALID_INPUT.getCode(), //
+    ErrorMsgDTO actual2 = ErrorMsgDTO.of(Syscode.INVALID_INPUT.getCode(), //
         Syscode.INVALID_INPUT.getMessage());
 
     assertThat(actual1.hashCode(), equalTo(1830450583));
@@ -81,7 +81,7 @@ public class ErrorMsgTest {
   @Test
   void toString1() {
 
-    ErrorMsg actual = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+    ErrorMsgDTO actual = ErrorMsgDTO.of(Syscode.DIVID_BY_ZERO.getCode(), //
         Syscode.DIVID_BY_ZERO.getMessage());
 
     assertThat(actual.toString(),

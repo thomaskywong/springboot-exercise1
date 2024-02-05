@@ -4,14 +4,14 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResult;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResultDTO;
 
 public class CalResultTest {
 
   @Test
   void getterX() {
 
-    CalResult result = CalResult.builder() //
+    CalResultDTO result = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
@@ -27,7 +27,7 @@ public class CalResultTest {
   @Test
   void getterY() {
 
-    CalResult result = CalResult.builder() //
+    CalResultDTO result = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
@@ -43,7 +43,7 @@ public class CalResultTest {
   @Test
   void getterOperation() {
 
-    CalResult result = CalResult.builder() //
+    CalResultDTO result = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
@@ -59,21 +59,21 @@ public class CalResultTest {
   @Test
   void equals() {
 
-    CalResult result1 = CalResult.builder() //
+    CalResultDTO result1 = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
         .result("-7.0") //
         .build();
 
-    CalResult result2 = CalResult.builder() //
+    CalResultDTO result2 = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
         .result("-7.0") //
         .build();
 
-    CalResult result3 = CalResult.builder() //
+    CalResultDTO result3 = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("add") //
@@ -91,21 +91,21 @@ public class CalResultTest {
   @Test
   void hashCode1() {
 
-    CalResult result1 = CalResult.builder() //
+    CalResultDTO result1 = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
         .result("-7.0") //
         .build();
 
-    CalResult result2 = CalResult.builder() //
+    CalResultDTO result2 = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
         .result("-7.0") //
         .build();
 
-    CalResult result3 = CalResult.builder() //
+    CalResultDTO result3 = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("add") //
@@ -126,7 +126,7 @@ public class CalResultTest {
   @Test
   void toString1() {
 
-    CalResult result1 = CalResult.builder() //
+    CalResultDTO result1 = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
@@ -143,14 +143,14 @@ public class CalResultTest {
   @Test
   void builder1() {
 
-    CalResult actual = CalResult.builder() //
+    CalResultDTO actual = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
         .result("-7.0") //
         .build();
     
-    CalResult result = new CalResult("3.0","10.0","sub","-7.0");
+    CalResultDTO result = new CalResultDTO("3.0","10.0","sub","-7.0");
 
     assertEquals(actual, result); 
     assertEquals(result, actual); 

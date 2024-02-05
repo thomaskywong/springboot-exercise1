@@ -11,16 +11,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @Builder
-public class ErrorMsg {
+public class InputDTO {
 
-  private int code;
-  private String message;
-
-  public static ErrorMsg of(int code, String message) {
-    return ErrorMsg.builder() //
-                 .code(code) //
-                 .message(message) //
-                 .build();
-  }
+  private String x;
+  private String y;
+  private String operation;
   
 }

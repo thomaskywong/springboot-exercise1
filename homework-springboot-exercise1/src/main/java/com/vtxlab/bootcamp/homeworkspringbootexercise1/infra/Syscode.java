@@ -6,6 +6,7 @@ public enum Syscode {
   INVALID_INPUT (2, "Invalid input."),
   INVALID_OPERATION (3, "Invalid operation."),
   DIVID_BY_ZERO (4, "Divided by zero."),
+  GENERAL_EXCEPTION(0, "General Exception"),
   ;
 
   private int code;

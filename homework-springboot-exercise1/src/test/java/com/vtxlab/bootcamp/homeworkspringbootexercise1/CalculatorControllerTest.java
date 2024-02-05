@@ -14,9 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.controller.impl.CalculatorController;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResult;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.ErrorMsg;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.Input;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResultDTO;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.ErrorMsgDTO;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.InputDTO;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Syscode;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.CalculatorService;
 
@@ -32,7 +32,7 @@ public class CalculatorControllerTest {
   @Test
   void testAdd() throws Exception {
 
-    CalResult mockCalResult = CalResult.builder() //
+    CalResultDTO mockCalResult = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("add") //
@@ -67,7 +67,7 @@ public class CalculatorControllerTest {
   @Test
   void testSub() throws Exception {
 
-    CalResult mockCalResult = CalResult.builder() //
+    CalResultDTO mockCalResult = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub")//
@@ -94,7 +94,7 @@ public class CalculatorControllerTest {
   @Test
   void testMul() throws Exception {
 
-    CalResult mockCalResult = CalResult.builder() //
+    CalResultDTO mockCalResult = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("mul")//
@@ -121,7 +121,7 @@ public class CalculatorControllerTest {
   @Test
   void testDiv() throws Exception {
 
-    CalResult mockCalResult = CalResult.builder() //
+    CalResultDTO mockCalResult = CalResultDTO.builder() //
         .x("10.0") //
         .y("3.0") //
         .operation("div")//
@@ -148,7 +148,7 @@ public class CalculatorControllerTest {
   @Test
   void testDivByZero() throws Exception {
 
-    ErrorMsg errMessage = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+    ErrorMsgDTO errMessage = ErrorMsgDTO.of(Syscode.DIVID_BY_ZERO.getCode(), //
         Syscode.DIVID_BY_ZERO.getMessage());
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -169,7 +169,7 @@ public class CalculatorControllerTest {
   @Test
   void testInvalidX() throws Exception {
 
-    ErrorMsg errMessage = ErrorMsg.of(Syscode.INVALID_INPUT.getCode(), //
+    ErrorMsgDTO errMessage = ErrorMsgDTO.of(Syscode.INVALID_INPUT.getCode(), //
         Syscode.INVALID_INPUT.getMessage());
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -190,7 +190,7 @@ public class CalculatorControllerTest {
   @Test
   void testInvalidY() throws Exception {
 
-    ErrorMsg errMessage = ErrorMsg.of(Syscode.INVALID_INPUT.getCode(), //
+    ErrorMsgDTO errMessage = ErrorMsgDTO.of(Syscode.INVALID_INPUT.getCode(), //
         Syscode.INVALID_INPUT.getMessage());
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -211,7 +211,7 @@ public class CalculatorControllerTest {
   @Test
   void testInvalidOperation() throws Exception {
 
-    ErrorMsg errMessage = ErrorMsg.of(Syscode.INVALID_OPERATION.getCode(), //
+    ErrorMsgDTO errMessage = ErrorMsgDTO.of(Syscode.INVALID_OPERATION.getCode(), //
         Syscode.INVALID_OPERATION.getMessage());
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -234,7 +234,7 @@ public class CalculatorControllerTest {
   @Test
   void testAdd2() throws Exception {
 
-    CalResult mockCalResult = CalResult.builder() //
+    CalResultDTO mockCalResult = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("add") //
@@ -258,7 +258,7 @@ public class CalculatorControllerTest {
   // @Test
   void testDivByZero2() throws Exception {
 
-    ErrorMsg errMessage = ErrorMsg.of(Syscode.DIVID_BY_ZERO.getCode(), //
+    ErrorMsgDTO errMessage = ErrorMsgDTO.of(Syscode.DIVID_BY_ZERO.getCode(), //
         Syscode.DIVID_BY_ZERO.getMessage());
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -278,14 +278,14 @@ public class CalculatorControllerTest {
   @Test
   void testSub2() throws Exception {
 
-    CalResult mockCalResult = CalResult.builder() //
+    CalResultDTO mockCalResult = CalResultDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
         .result("-7.0") //
         .build();
 
-    Input input = Input.builder() //
+    InputDTO input = InputDTO.builder() //
         .x("3.0") //
         .y("10.0") //
         .operation("sub") //
@@ -310,10 +310,10 @@ public class CalculatorControllerTest {
   @Test
   void testInvalidY2() throws Exception {
 
-    ErrorMsg errMessage = ErrorMsg.of(Syscode.INVALID_INPUT.getCode(), //
+    ErrorMsgDTO errMessage = ErrorMsgDTO.of(Syscode.INVALID_INPUT.getCode(), //
         Syscode.INVALID_INPUT.getMessage());
 
-    Input input = Input.builder() //
+    InputDTO input = InputDTO.builder() //
         .x("3.0") //
         .y("abc") //
         .operation("sub") //

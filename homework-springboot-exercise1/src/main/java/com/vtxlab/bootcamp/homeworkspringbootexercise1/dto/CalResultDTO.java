@@ -11,10 +11,21 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @Builder
-public class Input {
+public class CalResultDTO {
 
   private String x;
   private String y;
   private String operation;
-  
+  private String result;
+
+  public static CalResultDTO of(String x, String y, String operation,
+      String result) {
+    return CalResultDTO.builder() //
+        .x(x) //
+        .y(y) //
+        .operation(operation) //
+        .result(result) //
+        .build();
+  }
+
 }
