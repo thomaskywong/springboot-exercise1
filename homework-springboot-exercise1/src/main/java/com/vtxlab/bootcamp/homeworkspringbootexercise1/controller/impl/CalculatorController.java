@@ -23,7 +23,7 @@ public class CalculatorController implements CalculatorOperation {
   public CalResultDTO calculator(String x, String y,
       String operation) {
 
-    double result = 0.0d;
+    double result = -1.0d;
     double doubleX = 0.0d;
     double doubleY = 0.0d;
 

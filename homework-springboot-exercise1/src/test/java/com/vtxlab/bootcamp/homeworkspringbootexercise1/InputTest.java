@@ -136,7 +136,7 @@ public class InputTest {
     String actual = result1.toString();
 
 
-    assertThat(actual, equalTo("CalResult(x=3.0, y=10.0, operation=sub, result=-7.0)")); 
+    assertThat(actual, equalTo("CalResultDTO(x=3.0, y=10.0, operation=sub, result=-7.0)")); 
 
   }
 

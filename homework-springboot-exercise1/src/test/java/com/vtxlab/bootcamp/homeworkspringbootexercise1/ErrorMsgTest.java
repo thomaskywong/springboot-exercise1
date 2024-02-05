@@ -85,7 +85,7 @@ public class ErrorMsgTest {
         Syscode.DIVID_BY_ZERO.getMessage());
 
     assertThat(actual.toString(),
-        equalTo("ErrorMsg(code=4, message=Divided by zero.)"));
+        equalTo("ErrorMsgDTO(code=4, message=Divided by zero.)"));
 
   }
 

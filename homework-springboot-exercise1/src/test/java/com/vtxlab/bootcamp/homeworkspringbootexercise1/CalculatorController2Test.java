@@ -7,28 +7,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.controller.impl.CalculatorController;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.InputDTO;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Syscode;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.impl.CalculatorServiceImpl;
+import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.CalculatorService;
 
 @WebMvcTest(CalculatorController.class)
-public class CalculatorControllerTest {
+public class CalculatorController2Test {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @SpyBean
-    private CalculatorServiceImpl calculatorService;
+    @MockBean
+    private CalculatorService calculatorService;
 
     @Test
     void testAdd() throws Exception {
+
+        Mockito.when(calculatorService.add(3.0, 10.0)).thenReturn(13.0);
 
         mockMvc.perform(get("/api/v1/") //
                 .param("x", "3.0") //
@@ -45,6 +48,8 @@ public class CalculatorControllerTest {
 
     @Test
     void testSub() throws Exception {
+
+        Mockito.when(calculatorService.subtract(3.0, 10.0)).thenReturn(-7.0);
 
         // @RequestParam
         mockMvc.perform(get("/api/v1/") //
@@ -64,6 +69,8 @@ public class CalculatorControllerTest {
     @Test
     void testMul() throws Exception {
 
+        Mockito.when(calculatorService.multiply(3.0, 10.0)).thenReturn(30.0);
+
         mockMvc.perform(get("/api/v1/") //
                 .param("x", "3.0") //
                 .param("y", "10.0") //
@@ -79,6 +86,8 @@ public class CalculatorControllerTest {
 
     @Test
     void testDiv() throws Exception {
+
+        Mockito.when(calculatorService.divide(10.0, 3.0)).thenReturn(3.33333);
 
         // @RequestParam
         mockMvc.perform(get("/api/v1/") //
@@ -169,6 +178,8 @@ public class CalculatorControllerTest {
     @Test
     void testAdd2() throws Exception {
 
+        Mockito.when(calculatorService.add(3.0, 10.0)).thenReturn(13.0);
+
         // @PathVariable
         mockMvc.perform(
                 get("/api/v1/{x}/{y}/{operation}", "3.0", "10.0", "add"))
@@ -207,6 +218,8 @@ public class CalculatorControllerTest {
 
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonInput = objectMapper.writeValueAsString(input);
+
+        Mockito.when(calculatorService.subtract(3.0, 10.0)).thenReturn(-7.0);
 
         mockMvc.perform(post("/api/v1/") //
                 .contentType(MediaType.APPLICATION_JSON) //
