@@ -16,18 +16,17 @@ public interface CalculatorOperation {
   @ResponseStatus(value = HttpStatus.OK)
   CalResultDTO calculator(@RequestParam String x, //
       @RequestParam String y, //
-      @RequestParam String operation) throws Exception;
+      @RequestParam String operation);
 
   // @RequestParam
   @GetMapping(value = "/{x}/{y}/{operation}")
   @ResponseStatus(value = HttpStatus.OK)
   CalResultDTO calculator2(@PathVariable String x, //
       @PathVariable String y, //
-      @PathVariable String operation) throws Exception;
+      @PathVariable String operation);
 
   @PostMapping(value = "/")
   @ResponseStatus(value = HttpStatus.OK)
-  CalResultDTO calculator3(@RequestBody InputDTO input) 
-      throws Exception;
+  CalResultDTO calculator3(@RequestBody InputDTO input);
 
 }

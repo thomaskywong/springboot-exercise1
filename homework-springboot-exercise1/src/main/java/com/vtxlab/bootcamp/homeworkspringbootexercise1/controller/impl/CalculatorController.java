@@ -21,7 +21,7 @@ public class CalculatorController implements CalculatorOperation {
 
   @Override
   public CalResultDTO calculator(String x, String y,
-      String operation) throws Exception {
+      String operation) {
 
     double result = 0.0d;
     double doubleX = 0.0d;
@@ -66,12 +66,12 @@ public class CalculatorController implements CalculatorOperation {
 
   @Override
   public CalResultDTO calculator2(String x, String y,
-      String operation) throws Exception {
+      String operation) {
     return calculator(x, y, operation);
   }
 
   @Override
-  public CalResultDTO calculator3(InputDTO input) throws Exception {
+  public CalResultDTO calculator3(InputDTO input) {
     return calculator(input.getX(), input.getY(), input.getOperation());
   }
 
