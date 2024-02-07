@@ -20,10 +20,9 @@ public class CalculatorController implements CalculatorOperation {
   private CalculatorService calculatorService;
 
   @Override
-  public CalResultDTO calculator(String x, String y,
-      String operation) {
+  public CalResultDTO calculator(String x, String y, String operation) {
 
-    double result = -1.0d;
+    double result = 0.0d;
     double doubleX = 0.0d;
     double doubleY = 0.0d;
 
@@ -34,45 +33,36 @@ public class CalculatorController implements CalculatorOperation {
       throw new InvalidInputException();
     }
 
-    if (Operator.ADD.getDesc().equals(operation)){ 
+    Operator operator = Operator.operatorEnum(operation);
 
-      result = calculatorService.add(doubleX, doubleY);
-    
-    } else if (Operator.SUBSTRACT.getDesc().equals(operation)) {
-    
-      result = calculatorService.subtract(doubleX, doubleY);
-    
-    } else if (Operator.MULTIPLY.getDesc().equals(operation)) {
-    
-      result = calculatorService.multiply(doubleX, doubleY);
-    
-    } else if (Operator.DIVIDE.getDesc().equals(operation)) {
-    
-      if (doubleY == 0.0) { 
-        throw new DivideByZeroException();    
+    switch(operator) {
+      case ADD:
+        result = calculatorService.add(doubleX, doubleY);
+        break;
+      case SUBSTRACT:
+        result = calculatorService.subtract(doubleX, doubleY);
+        break;
+      case MULTIPLY:
+        result = calculatorService.multiply(doubleX, doubleY);
+        break;
+      case DIVIDE:
+        if (doubleY == 0.0)
+          throw new DivideByZeroException();
+        result = calculatorService.divide(doubleX, doubleY);
       }
-    
-      result = calculatorService.divide(doubleX, doubleY);
-    
-    } else {
-    
-      throw new InvalidOperationException();
-    
-    }
 
     return CalResultDTO.of(x, y, operation, String.valueOf(result));
-
+ 
   }
 
   @Override
-  public CalResultDTO calculator2(String x, String y,
-      String operation) {
-    return calculator(x, y, operation);
+  public CalResultDTO calculator2(String x, String y, String operation) {
+    return this.calculator(x, y, operation);
   }
 
   @Override
   public CalResultDTO calculator3(InputDTO input) {
-    return calculator(input.getX(), input.getY(), input.getOperation());
+    return this.calculator(input.getX(), input.getY(), input.getOperation());
   }
 
 

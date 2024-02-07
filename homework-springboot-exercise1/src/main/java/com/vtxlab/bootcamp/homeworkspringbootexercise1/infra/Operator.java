@@ -17,5 +17,15 @@ public enum Operator {
     this.desc = desc;
   }
 
+  public static Operator operatorEnum(String operation) {
+    return switch (operation) {
+                  case "add" -> Operator.ADD;
+                  case "sub" -> Operator.SUBSTRACT;
+                  case "mul" -> Operator.MULTIPLY;
+                  case "div" -> Operator.DIVIDE;
+                  default -> throw new InvalidOperationException();
+                  };
+  }
+
   
 }
