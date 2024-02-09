@@ -15,10 +15,13 @@ public class OperatorTest {
     assertThat(Operator.operatorEnum("mul"), equalTo(Operator.MULTIPLY));
     assertThat(Operator.operatorEnum("div"), equalTo(Operator.DIVIDE));
 
-    assertThat("add", equalTo(Operator.ADD.getDesc()));
-    assertThat("sub", equalTo(Operator.SUBSTRACT.getDesc()));
-    assertThat("mul", equalTo(Operator.MULTIPLY.getDesc()));
-    assertThat("div", equalTo(Operator.DIVIDE.getDesc()));
+    assertThat(Operator.ADD.getDesc(), equalTo("add"));
+    assertThat(Operator.SUBSTRACT.getDesc(), equalTo("sub"));
+    assertThat(Operator.MULTIPLY.getDesc(), equalTo("mul"));
+    assertThat(Operator.DIVIDE.getDesc(), equalTo("div"));
+
+    assertThat(Operator.operatorEnum("div"), not(equalTo(Operator.ADD)));
+    assertThat(Operator.ADD.getDesc(), not(equalTo("mul")));
     
 
   }

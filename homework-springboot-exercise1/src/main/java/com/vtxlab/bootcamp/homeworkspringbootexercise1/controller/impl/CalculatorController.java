@@ -8,7 +8,6 @@ import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.CalResultDTO;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.dto.InputDTO;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.DivideByZeroException;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.InvalidInputException;
-import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.InvalidOperationException;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.infra.Operator;
 import com.vtxlab.bootcamp.homeworkspringbootexercise1.service.CalculatorService;
 

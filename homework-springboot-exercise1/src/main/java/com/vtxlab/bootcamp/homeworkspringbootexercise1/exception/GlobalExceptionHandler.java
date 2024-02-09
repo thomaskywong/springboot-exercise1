@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(InvalidInputException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-  public ErrorMsgDTO DivideByZeroExceptionHandler(InvalidInputException e) {
+  public ErrorMsgDTO InvalidInputExceptionHandler(InvalidInputException e) {
     return ErrorMsgDTO.builder() //
                       .code(Syscode.INVALID_INPUT.getCode()) //
                       .message(Syscode.INVALID_INPUT.getMessage()) //
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler(InvalidOperationException.class)
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-  public ErrorMsgDTO DivideByZeroExceptionHandler(InvalidOperationException e) {
+  public ErrorMsgDTO InvalidOperationExceptionHandler(InvalidOperationException e) {
     return ErrorMsgDTO.builder() //
                       .code(Syscode.INVALID_OPERATION.getCode()) //
                       .message(Syscode.INVALID_OPERATION.getMessage()) //
